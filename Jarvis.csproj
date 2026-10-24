@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>Jarvis</AssemblyName>
+    <RootNamespace>Jarvis</RootNamespace>
+    <ApplicationIcon>jarvis.ico</ApplicationIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Product>Jarvis</Product>
+    <Description>Jarvis — автономный голосовой помощник</Description>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- WasapiCapture помечен устаревшим в NAudio 3.x, но работает -->
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="3.2.0" />
+    <PackageReference Include="Whisper.net" Version="1.9.1" />
+    <PackageReference Include="Whisper.net.Runtime" Version="1.9.1" />
+  </ItemGroup>
+
+  <!-- Иконка всегда внутри сборки: так она работает и в обычной папке, и в одном exe. -->
+  <ItemGroup>
+    <EmbeddedResource Include="jarvis.ico" LogicalName="Jarvis.Resources.jarvis.ico" />
+  </ItemGroup>
+
+  <!-- Для сборки одним файлом модель кладётся внутрь exe. -->
+  <ItemGroup Condition="'$(EmbedModel)' == 'true'">
+    <EmbeddedResource Include="model\ggml-base-q5_1.bin"
+                      LogicalName="Jarvis.Resources.ggml-base-q5_1.bin" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(EmbedModel)' != 'true'">
+    <None Update="model\*.bin" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="jarvis.ico" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
