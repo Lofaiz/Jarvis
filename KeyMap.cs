@@ -82,8 +82,7 @@ static class KeyMap
         return new HotKeyDef(mods, (int)vk, Format(mods, (int)vk));
     }
 
-    // Клавишу без модификаторов глобально перехватывать можно только
-    // «безопасную»: иначе она перестала бы печататься во всех программах.
+    // Клавишу без модификаторов глобально перехватывать можно только «безопасную»: иначе она перестала бы печататься во всех программах.
     public static bool IsAllowed(int mods, int vk)
     {
         if (mods != 0) return true;
@@ -94,8 +93,7 @@ static class KeyMap
     }
 }
 
-// Состояние клавиши: RegisterHotKey сообщает только о нажатии, а для режима
-// «удержания» нужно ещё и отпускание — опрашиваем через GetAsyncKeyState.
+// Состояние клавиши: RegisterHotKey сообщает только о нажатии, а для режима «удержания» нужно ещё и отпускание — опрашиваем через GetAsyncKeyState.
 static class KeyState
 {
     [System.Runtime.InteropServices.DllImport("user32.dll")]
