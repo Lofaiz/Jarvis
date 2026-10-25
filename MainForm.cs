@@ -1,5 +1,4 @@
-// Главное окно и вся логика Джарвиса: трей, глобальные клавиши, голосовой ввод,
-// выполнение команд. Никакой сети, кроме погоды и курса валют, никакого ИИ.
+// Главное окно и вся логика Джарвиса: трей, глобальные клавиши, голосовой ввод, выполнение команд.
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -454,11 +453,9 @@ class MainForm : Form
     {
         if (stt == null) return;
 
-        // отпустили клавишу — заканчиваем запись
         if (stt.Recording && holdMode && voiceByKey && !KeyState.Down(HkVoice.Vk))
             StopVoice();
 
-        // ждали, пока освободится распознаватель
         if (pendingVoice && !stt.Busy && stt.Ready)
         {
             pendingVoice = false;
@@ -819,8 +816,7 @@ class MainForm : Form
         }
         catch { }
 
-        // запасной путь: файл не найден по полному пути — пробуем запустить по имени
-        // (сработает, если программа есть в PATH или в App Paths реестра)
+        // запасной путь: файл не найден по полному пути — пробуем запустить по имени (сработает, если программа есть в PATH или в App Paths реестра)
         try
         {
             if (target.Contains('\\') || target.Contains('/'))
