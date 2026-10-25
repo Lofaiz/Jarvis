@@ -1,6 +1,5 @@
-// В сборке «один exe» нативные библиотеки Whisper .NET распаковывает во временную
-// папку вида %TEMP%\.net\Jarvis\<hash>\runtimes\win-x64. Штатный загрузчик
-// Whisper.net ищет их рядом с exe и сам эту папку не находит — подсказываем путь.
+// В сборке «один exe» нативные библиотеки Whisper .NET распаковывает во временную папку вида %TEMP%\.net\Jarvis\<hash>\runtimes\win-x64. 
+// Штатный загрузчик Whisper.net ищет их рядом с exe и сам эту папку не находит — подсказываем путь.
 using Whisper.net.LibraryLoader;
 
 namespace Jarvis;
