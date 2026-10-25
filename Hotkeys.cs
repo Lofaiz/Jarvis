@@ -1,5 +1,4 @@
-// Глобальные хоткеи. Окно-получатель сообщений — скрытое окно без UI: система
-// сама шлёт ему WM_HOTKEY, клавиши работают даже когда Джарвис спрятан в трей.
+// Глобальные хоткеи. Окно-получатель сообщений — скрытое окно без UI: система сама шлёт ему WM_HOTKEY, клавиши работают даже когда Джарвис спрятан в трей.
 using System.Runtime.InteropServices;
 
 namespace Jarvis;
@@ -9,7 +8,7 @@ class HotkeyWindow : NativeWindow, IDisposable
     public const int WM_HOTKEY = 0x0312;
     const int ID_VOICE = 0x7A01;
     const int ID_WINDOW = 0x7A02;
-    const uint MOD_NOREPEAT = 0x4000; // без автоповтора
+    const uint MOD_NOREPEAT = 0x4000; 
 
     public event Action VoicePressed;
     public event Action WindowPressed;
