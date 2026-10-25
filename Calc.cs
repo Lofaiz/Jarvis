@@ -1,5 +1,4 @@
-// Калькулятор для голосовых команд: понимает «15 плюс 7», «двадцать умножить
-// на три», «15 процентов от 200». Считает без ИИ, обычным разбором выражения.
+// Калькулятор для голосовых команд. Считает без ИИ, обычным разбором выражения.
 using System.Globalization;
 using System.Text;
 
@@ -29,7 +28,7 @@ static class Calc
         s = WordsToDigits(s);
         s = ReplaceOps(s);
 
-        // остались только цифры, операторы, точка, скобки и минус
+        
         if (!s.Any(char.IsDigit)) return false;
         foreach (var ch in s)
             if (!(char.IsDigit(ch) || ch is '+' or '-' or '*' or '/' or '^' or '.' or '(' or ')' or ' '))
@@ -57,7 +56,7 @@ static class Calc
         return s;
     }
 
-    // «двадцать пять» → «25»; одиночные числа тоже
+    
     static string WordsToDigits(string s)
     {
         var tokens = s.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -118,8 +117,6 @@ static class Calc
         })
             s = s.Replace(from, to);
 
-        // разговорное «15 на 7» = 15 × 7; выполняем последним, чтобы не съесть
-        // «умножить на» и «разделить на»
         s = s.Replace(" на ", " * ").Replace(" x ", " * ").Replace(" х ", " * ");
         s = s.Replace(",", ".");
         return string.Join(' ', s.Split(' ', StringSplitOptions.RemoveEmptyEntries));
@@ -131,7 +128,6 @@ static class Calc
         return Math.Round(v, 4).ToString("0.####", CultureInfo.InvariantCulture).Replace('.', ',');
     }
 
-    // ------------------------------------------------------------------ разбор
     static void Skip(string s, ref int i)
     {
         while (i < s.Length && s[i] == ' ') i++;
