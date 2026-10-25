@@ -1,4 +1,4 @@
-// Тёмная тема: цвета и кнопки — как в Милли, чтобы Джарвис выглядел знакомо.
+
 using System.Windows.Forms;
 
 namespace Jarvis;
